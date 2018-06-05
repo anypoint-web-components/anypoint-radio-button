@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+    <title>anypoint-radio-button demo</title>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+      import '@polymer/paper-radio-group/paper-radio-group';
+      import '@polymer/marked-element/marked-element';
+    </script>
+    <script type="module" src="../anypoint-radio-button.js"></script>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      anypoint-radio-button {
+        margin-right: 12px;
+      }
+
+      paper-radio-group anypoint-radio-button {
+        margin-right: 0;
+      }
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Regular toggle buttons</h3>
+      <demo-snippet>
+        <template>
+          <anypoint-radio-button>Apple</anypoint-radio-button>
+          <anypoint-radio-button checked>Banana</anypoint-radio-button>
+          <anypoint-radio-button disabled>Orange (this is disabled!)</anypoint-radio-button>
+        </template>
+      </demo-snippet>
+
+      <h2>Radio group</h2>
+      <marked-element>
+        <div slot="markdown-html"></div>
+        <script type="text/markdown">
+          1.   First install `paper-radio-group`
+          ```
+          npm i --save @polymer/paper-radio-group
+          ```
+          2.   Set `selectable` attribute to `anypoint-radio-button`
+          ```html
+          <paper-radio-group selectable="anypoint-radio-button">
+          ...
+          </paper-radio-group>
+          ```
+        </script>
+      </marked-element>
+
+      <h3>Buttons in radio group</h3>
+      <demo-snippet>
+        <template>
+          <label id="label1">Fruits:</label>
+          <paper-radio-group aria-labelledby="label1" selected="b" selectable="anypoint-radio-button">
+            <anypoint-radio-button name="a">Apple</anypoint-radio-button>
+            <anypoint-radio-button name="b">Banana</anypoint-radio-button>
+            <anypoint-radio-button name="c" disabled>Orange (this is disabled!)</anypoint-radio-button>
+          </paper-radio-group>
+        </template>
+      </demo-snippet>
+
+      <h3>Radio group can optionally allow items to be deselected</h3>
+      <demo-snippet>
+        <template>
+          <label id="label2">Fruits:</label>
+          <paper-radio-group aria-labelledby="label2" selectable="anypoint-radio-button" allow-empty-selection>
+            <anypoint-radio-button name="a">Apple</anypoint-radio-button>
+            <anypoint-radio-button name="b">Banana</anypoint-radio-button>
+            <anypoint-radio-button name="c">Orange</anypoint-radio-button>
+          </paper-radio-group>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>

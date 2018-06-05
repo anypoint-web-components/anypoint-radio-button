@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "`anypoint-radio-button`\n\nAnypoint styled radio button.\n\n## Usage\n\nInstall element:\n\n```\nnpm i --save @anypoint-components/anypoint-radio-button\n```\n\nImport into your app:\n\n```html\n<script type=\"module\" src=\"node_modules/@anypoint-components/anypoint-radio-button.js\"></script>\n```\n\nOr into another component\n\n```javascript\nimport '@anypoint-components/anypoint-radio-button.js';\n```\n\nUse it:\n\n```html\n<paper-radio-group selectable=\"anypoint-radio-button\">\n <anypoint-radio-button name=\"a\">Apple</anypoint-radio-button>\n <anypoint-radio-button name=\"b\">Banana</anypoint-radio-button>\n <anypoint-radio-button name=\"c\">Orange</anypoint-radio-button>\n</paper-radio-group>\n```\n\n### Styling\n\n`<anypoint-radio-button>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`\n`--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `#989a9b`\n`--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`\n`--anypoint-radio-button-checked-color` | Checked button selection color | `#00a2df`\n`--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`\n`--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`\n`--anypoint-radio-button-label-color` | Label color | `--primary-text-color`\n`--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`",
+      "summary": "",
+      "path": "anypoint-radio-button.js",
+      "properties": [
+        {
+          "name": "noink",
+          "type": "boolean | null | undefined",
+          "description": "Overrides PaperInkyBehavior",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 6
+            },
+            "end": {
+              "line": 171,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "readOnly": true,
+              "attributeType": "Boolean"
+            }
+          },
+          "defaultValue": "true"
+        }
+      ],
+      "methods": [
+        {
+          "name": "connectedCallback",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 181,
+              "column": 2
+            },
+            "end": {
+              "line": 186,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "ensureRipple",
+          "description": "Overrides PaperInkyBehavior",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 188,
+              "column": 2
+            },
+            "end": {
+              "line": 188,
+              "column": 19
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "return": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "_updateCheckedAria",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 190,
+              "column": 2
+            },
+            "end": {
+              "line": 195,
+              "column": 3
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "checked"
+            }
+          ],
+          "return": {
+            "type": "void"
+          }
+        }
+      ],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo/index.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 58,
+          "column": 0
+        },
+        "end": {
+          "line": 196,
+          "column": 1
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "name": "AnypointRadioButton",
+      "attributes": [
+        {
+          "name": "noink",
+          "description": "Overrides PaperInkyBehavior",
+          "sourceRange": {
+            "start": {
+              "line": 167,
+              "column": 6
+            },
+            "end": {
+              "line": 171,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "boolean | null | undefined"
+        }
+      ],
+      "events": [],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [],
+      "tagname": "anypoint-radio-button"
+    }
+  ]
+}
