@@ -55,6 +55,7 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
  * @customElement
  * @polymer
  * @demo demo/index.html
+ * @memberof AnypointComponents
  */
 class AnypointRadioButton extends Polymer.mixinBehaviors([PaperCheckedElementBehavior], PolymerElement) {
   static get template() {
