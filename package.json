@@ -7,6 +7,7 @@
   ],
   "private": true,
   "dependencies": {
+    "@anypoint-components/anypoint-styles": "github:anypoint-components/anypoint-styles#3.0.0-preview",
     "@polymer/paper-behaviors": "^3.0.0-pre.19",
     "@polymer/polymer": "^3.0.0"
   },

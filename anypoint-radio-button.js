@@ -2,6 +2,8 @@ import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import * as Polymer from '@polymer/polymer/lib/legacy/class.js';
 import {PaperCheckedElementBehavior} from '@polymer/paper-behaviors/paper-checked-element-behavior.js';
 import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import '@anypoint-components/anypoint-styles/typography.js';
+import '@anypoint-components/anypoint-styles/colors.js';
 /**
  * `anypoint-radio-button`
  *
@@ -44,9 +46,9 @@ import '@polymer/iron-flex-layout/iron-flex-layout.js';
  * Custom property | Description | Default
  * ----------------|-------------|----------
  * `--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`
- * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `#989a9b`
+ * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `--anypoint-color-aluminum5`
  * `--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`
- * `--anypoint-radio-button-checked-color` | Checked button selection color | `#00a2df`
+ * `--anypoint-radio-button-checked-color` | Checked button selection color | `--anypoint-color-coreBlue3`
  * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`
  * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
  * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
@@ -94,7 +96,7 @@ class AnypointRadioButton extends Polymer.mixinBehaviors([PaperCheckedElementBeh
       }
 
       #offRadio {
-        border: 1px solid var(--anypoint-radio-button-unchecked-color, #989a9b);
+        border: 1px solid var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
         background-color: var(--anypoint-radio-button-unchecked-background-color, transparent);
         transition: background-color 0.28s, border-color 0.28s;
       }
@@ -109,8 +111,8 @@ class AnypointRadioButton extends Polymer.mixinBehaviors([PaperCheckedElementBeh
       }
 
       :host([checked]) #offRadio {
-        border-color: var(--anypoint-radio-button-checked-color, #00a2df);
-        background-color: var(--anypoint-radio-button-checked-color, #00a2df);
+        border-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-coreBlue3));
+        background-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-coreBlue3));
       }
 
       :host([checked]) #onRadio {
@@ -143,12 +145,12 @@ class AnypointRadioButton extends Polymer.mixinBehaviors([PaperCheckedElementBeh
       }
 
       :host([disabled]) #offRadio {
-        border-color: var(--anypoint-radio-button-unchecked-color, #989a9b);
+        border-color: var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
         opacity: 0.5;
       }
 
       :host([disabled][checked]) #onRadio {
-        background-color: var(--anypoint-radio-button-unchecked-color, #989a9b);
+        background-color: var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
         opacity: 0.5;
       }
 
