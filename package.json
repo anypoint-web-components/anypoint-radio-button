@@ -8,17 +8,17 @@
   "private": true,
   "dependencies": {
     "@anypoint-components/anypoint-styles": "github:anypoint-components/anypoint-styles#3.0.0-preview",
-    "@polymer/paper-behaviors": "^3.0.0-pre.19",
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/paper-behaviors": "^3.0.1",
+    "@polymer/polymer": "^3.1.0"
   },
   "devDependencies": {
-    "@polymer/iron-component-page": "^3.0.0-pre.18",
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
-    "@polymer/paper-radio-group": "^3.0.0-pre.19",
-    "@polymer/test-fixture": "^3.0.0-pre.19",
-    "@webcomponents/webcomponentsjs": "^2.0.0",
-    "wct-browser-legacy": "^1.0.0",
-    "@polymer/gen-typescript-declarations": "^1.1.1"
+    "@polymer/gen-typescript-declarations": "^1.6.1",
+    "@polymer/iron-component-page": "^3.0.0-pre.21",
+    "@polymer/iron-demo-helpers": "^3.0.2",
+    "@polymer/paper-radio-group": "^3.0.1",
+    "@polymer/test-fixture": "^3.0.0-pre.21",
+    "@webcomponents/webcomponentsjs": "^2.2.7",
+    "wct-browser-legacy": "^1.0.2"
   },
   "scripts": {
     "test": "polymer test --plugin local",
