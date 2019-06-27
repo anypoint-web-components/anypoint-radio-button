@@ -1,9 +1,5 @@
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-import * as Polymer from '@polymer/polymer/lib/legacy/class.js';
-import {PaperCheckedElementBehavior} from '@polymer/paper-behaviors/paper-checked-element-behavior.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@anypoint-components/anypoint-styles/typography.js';
-import '@anypoint-components/anypoint-styles/colors.js';
+import { LitElement, html, css } from 'lit-element';
+import { CheckedElementMixin } from '@anypoint-web-components/anypoint-form-mixins/anypoint-form-mixins.js';
 /**
  * `anypoint-radio-button`
  *
@@ -55,147 +51,262 @@ import '@anypoint-components/anypoint-styles/colors.js';
  * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
  *
  * @customElement
- * @polymer
  * @demo demo/index.html
  * @memberof AnypointComponents
  */
-class AnypointRadioButton extends Polymer.mixinBehaviors([PaperCheckedElementBehavior], PolymerElement) {
-  static get template() {
-    return html`
-      <style>
-      :host {
-        display: inline-block;
-        line-height: 0;
-        white-space: nowrap;
-        cursor: pointer;
-        @apply --anypoint-font-common-base;
-      }
+class AnypointRadioButton extends CheckedElementMixin(LitElement) {
+  static get styles() {
+    return css`
+    :host {
+      display: inline-flex;
+      flex-direction: row;
+      align-items: center;
+      line-height: 0;
+      white-space: nowrap;
+      cursor: pointer;
+    }
 
-      :host(:focus) {
-        outline: none;
-      }
+    :host(:focus) {
+      outline: none;
+    }
 
-      #radioContainer {
-        @apply --layout-inline;
-        @apply --layout-center-center;
-        position: relative;
-        vertical-align: middle;
-        width: 20px;
-        height: 20px;
-        @apply --anypoint-radio-button-radio-container;
-      }
+    :host([disabled]) {
+      cursor: auto;
+      pointer-events: none;
+      color: var(--anypoint-radio-button-disabled-color, #a8a8a8);
+    }
 
-      #offRadio, #onRadio {
-        position: absolute;
-        box-sizing: border-box;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-      }
+    .radio-container {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      position: relative;
+      vertical-align: middle;
+      width: 16px;
+      height: 16px;
+      padding: 8px;
+    }
 
-      #offRadio {
-        border: 1px solid var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
-        background-color: var(--anypoint-radio-button-unchecked-background-color, transparent);
-        transition: background-color 0.28s, border-color 0.28s;
-      }
+    .radio-container:before {
+      top: 0%;
+      left: 0%;
+      width: 100%;
+      height: 100%;
+      opacity: 0.04;
+      background-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-primary));
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform ease 0.18s;
+      will-change: transform;
+    }
 
-      #onRadio {
-        background-color: var(--anypoint-radio-button-checked-inner-background-color, #fff);
-        -webkit-transform: scale(0);
-        transform: scale(0);
-        transition: -webkit-transform ease 0.28s;
-        transition: transform ease 0.28s;
-        will-change: transform;
-      }
+    .radio-container:hover:before,
+    :host(:focus) .radio-container:before {
+      transform: scale(1);
+    }
 
-      :host([checked]) #offRadio {
-        border-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-coreBlue3));
-        background-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-coreBlue3));
-      }
+    :host(:focus) .radio-container:before {
+      opacity: 0.08;
+    }
 
-      :host([checked]) #onRadio {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-      }
+    .state-container {
+      width: 16px;
+      height: 16px;
+      position: relative;
+    }
 
-      #radioLabel {
-        line-height: normal;
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: var(--anypoint-radio-button-label-spacing, 5px);
-        white-space: normal;
-        color: var(--anypoint-radio-button-label-color, var(--primary-text-color));
-        @apply --anypoint-radio-button-label;
-      }
+    #offRadio, #onRadio {
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+      border-width: 1px;
+      border-color: transparent;
+      border-style: solid;
+      position: absolute;
+    }
 
-      :host([checked]) #radioLabel {
-        @apply --anypoint-radio-button-label-checked;
-      }
+    #offRadio {
+      border-color: var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
+      background-color: var(--anypoint-radio-button-unchecked-background-color, transparent);
+      transition: background-color 0.28s, border-color 0.28s;
+    }
 
-      :host-context([dir="rtl"]) #radioLabel {
-        margin-left: 0;
-        margin-right: var(--anypoint-radio-button-label-spacing, 5px);
-      }
+    :host(:hover) #offRadio {
+      border-color: var(--anypoint-radio-button-hover-unchecked-color, var(--anypoint-color-coreBlue2));
+    }
 
-      #radioLabel[hidden] {
-        display: none;
-      }
+    :host(:active) #offRadio,
+    :host(:focus) #offRadio {
+      border-color: var(--anypoint-radio-button-active-unchecked-color, var(--anypoint-color-coreBlue3));
+    }
 
-      :host([disabled]) #offRadio {
-        border-color: var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
-        opacity: 0.5;
-      }
+    :host([checked]) #offRadio {
+      border-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-coreBlue3));
+      background-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-coreBlue3));
+    }
 
-      :host([disabled][checked]) #onRadio {
-        background-color: var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-aluminum5));
-        opacity: 0.5;
-      }
+    :host([disabled]) #offRadio {
+      border-color: var(--anypoint-radio-button-unchecked-color, var(--anypoint-color-steel1));
+      opacity: 0.65;
+    }
 
-      :host([disabled]) #radioLabel {
-        opacity: 0.65;
-      }
-      </style>
-      <div id="radioContainer">
-        <div id="offRadio"></div>
-        <div id="onRadio"></div>
-      </div>
-      <div id="radioLabel"><slot></slot></div>
+    :host([disabled][checked]) #offRadio {
+      background-color: var(--anypoint-radio-button-checked-color, var(--anypoint-color-steel1));
+    }
+
+    #onRadio {
+      background-color: var(--anypoint-radio-button-checked-inner-background-color, #fff);
+      -webkit-transform: scale(0);
+      transform: scale(0);
+      transition: -webkit-transform ease 0.28s;
+      transition: transform ease 0.28s;
+      will-change: transform;
+    }
+
+    :host([checked]) #onRadio {
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+    }
+
+    .radioLabel {
+      line-height: normal;
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      white-space: normal;
+      color: var(--anypoint-radio-button-label-color, var(--primary-text-color));
+    }
+
+    :host-context([dir="rtl"]) .radioLabel {
+      margin-left: 8px;
+    }
+
+    :host([disabled]) #radioLabel {
+      opacity: 0.65;
+    }
     `;
   }
-  static get properties() {
-    return {
-      // Overrides PaperInkyBehavior
-      noink: {
-        type: Boolean,
-        value: true,
-        readOnly: true
-      }
-    };
+
+  render() {
+    return html`
+      <div class="radio-container">
+        <div class="state-container">
+          <div id="offRadio"></div>
+          <div id="onRadio"></div>
+        </div>
+      </div>
+      <label class="radioLabel"><slot></slot></label>`;
   }
 
-  static get observers() {
-    return [
-      '_updateCheckedAria(checked)'
-    ];
+  get checked() {
+    return this._checked || false;
+  }
+
+  set checked(value) {
+    if (this._setChanged('checked', value)) {
+      this._updateCheckedAria(value);
+      this._checkedChanged(value);
+    }
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  set disabled(value) {
+    if (this._setChanged('disabled', value)) {
+      this._disabledChanged(value);
+    }
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this._ensureAttribute('tabindex', 0);
-    this._ensureAttribute('role', 'radio');
-    this._ensureAttribute('aria-checked', 'false');
+    if (!this.hasAttribute('role')) {
+      this.setAttribute('role', 'radio');
+    }
+    if (!this.hasAttribute('tabindex')) {
+      this.setAttribute('tabindex', '0');
+    }
+    if (this.checked === undefined) {
+      this.checked = false;
+    } else {
+      this._updateCheckedAria(this.checked);
+    }
+    this.addEventListener('keydown', this._keyDownHandler);
+    this.addEventListener('click', this._clickHandler);
   }
-  // Overrides PaperInkyBehavior
-  ensureRipple() {}
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.addEventListener('keydown', this._keyDownHandler);
+    this.addEventListener('click', this._clickHandler);
+  }
 
   _updateCheckedAria(checked) {
     if (checked === undefined) {
       checked = false;
     }
     this.setAttribute('aria-checked', String(checked));
+  }
+
+  /**
+   * Handler for keyboard down event
+   * @param {KeyboardEvent} e
+   */
+  _keyDownHandler(e) {
+    if (e.code === 'Enter' || e.code === 'NumpadEnter' || e.keyCode === 13) {
+      this._clickHandler(e);
+      this._asyncClick();
+    } else if (e.code === 'Space' || e.keyCode === 32) {
+      this._clickHandler(e);
+      this._asyncClick();
+      e.preventDefault();
+    }
+  }
+  /**
+   * Handler for pointer click event
+   * @param {MouseEvent} e
+   */
+  _clickHandler() {
+    if (this.disabled) {
+      return;
+    }
+    this.checked = true;
+  }
+  /**
+   * Performs a click operation in next macrotask.
+   */
+  _asyncClick() {
+    setTimeout(() => this.click(), 1);
+  }
+  /**
+   * Handles `disable` property state change and manages `aria-disabled`
+   * and `tabindex` attributes.
+   * @param {Boolean} disabled
+   */
+  _disabledChanged(disabled) {
+    this.setAttribute('aria-disabled', disabled ? 'true' : 'false');
+    if (disabled) {
+      // Read the `tabindex` attribute instead of the `tabIndex` property.
+      // The property returns `-1` if there is no `tabindex` attribute.
+      // This distinction is important when restoring the value because
+      // leaving `-1` hides shadow root children from the tab order.
+      this._oldTabIndex = this.getAttribute('tabindex');
+      this.focused = false;
+      this.setAttribute('tabindex', '-1');
+      this.blur();
+    } else if (this._oldTabIndex !== undefined) {
+      if (this._oldTabIndex === null) {
+        this.removeAttribute('tabindex');
+      } else {
+        this.setAttribute('tabindex', this._oldTabIndex);
+      }
+    }
   }
 }
 
