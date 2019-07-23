@@ -33,11 +33,11 @@
     "lit-element": "^2.0.1"
   },
   "devDependencies": {
-    "@advanced-rest-client/a11y-suite": "^1.0.0",
+    "@advanced-rest-client/a11y-suite": "^1.1.0",
     "@advanced-rest-client/arc-demo-helper": "^1.0.3",
     "@advanced-rest-client/testing-karma-sl": "^1.0.2",
     "@anypoint-web-components/anypoint-styles": "^1.0.0-preview.1",
-    "@commitlint/cli": "^7.0.0",
+    "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^7.0.0",
     "@open-wc/eslint-config": "^0.4.1",
     "@open-wc/prettier-config": "^0.1.0",
