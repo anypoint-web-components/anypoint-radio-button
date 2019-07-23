@@ -9,137 +9,140 @@
  *   anypoint-radio-button.js
  */
 
-/**
- * `anypoint-radio-button`
- *
- * Anypoint styled radio button.
- *
- * ## Usage
- *
- * Install element:
- *
- * ```
- * npm i --save @anypoint-components/anypoint-radio-button
- * ```
- *
- * Import into your app:
- *
- * ```html
- * <script type="module" src="node_modules/@anypoint-components/anypoint-radio-button.js"></script>
- * ```
- *
- * Or into another component
- *
- * ```javascript
- * import '@anypoint-components/anypoint-radio-button.js';
- * ```
- *
- * Use it:
- *
- * ```html
- * <paper-radio-group selectable="anypoint-radio-button">
- *  <anypoint-radio-button name="a">Apple</anypoint-radio-button>
- *  <anypoint-radio-button name="b">Banana</anypoint-radio-button>
- *  <anypoint-radio-button name="c">Orange</anypoint-radio-button>
- * </paper-radio-group>
- * ```
- *
- * ### Styling
- *
- * `<anypoint-radio-button>` provides the following custom properties and mixins for styling:
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`
- * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `#989a9b`
- * `--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`
- * `--anypoint-radio-button-checked-color` | Checked button selection color | `#00a2df`
- * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`
- * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
- * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
- * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
- */
-declare class AnypointRadioButton extends Polymer.Element {
+declare namespace AnypointComponents {
 
   /**
-   * Overrides PaperInkyBehavior
+   * `anypoint-radio-button`
+   *
+   * Anypoint styled radio button.
+   *
+   * ## Usage
+   *
+   * Install element:
+   *
+   * ```
+   * npm i --save @anypoint-components/anypoint-radio-button
+   * ```
+   *
+   * Import into your app:
+   *
+   * ```html
+   * <script type="module" src="node_modules/@anypoint-components/anypoint-radio-button.js"></script>
+   * ```
+   *
+   * Or into another component
+   *
+   * ```javascript
+   * import '@anypoint-components/anypoint-radio-button.js';
+   * ```
+   *
+   * Use it:
+   *
+   * ```html
+   * <paper-radio-group selectable="anypoint-radio-button">
+   *  <anypoint-radio-button name="a">Apple</anypoint-radio-button>
+   *  <anypoint-radio-button name="b">Banana</anypoint-radio-button>
+   *  <anypoint-radio-button name="c">Orange</anypoint-radio-button>
+   * </paper-radio-group>
+   * ```
+   *
+   * ### Styling
+   *
+   * `<anypoint-radio-button>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`
+   * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `#989a9b`
+   * `--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`
+   * `--anypoint-radio-button-checked-color` | Checked button selection color | `#00a2df`
+   * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`
+   * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
+   * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
+   * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
    */
-  readonly noink: boolean|null|undefined;
-  connectedCallback(): void;
+  class AnypointRadioButton extends Polymer.Element {
+
+    /**
+     * Overrides PaperInkyBehavior
+     */
+    readonly noink: boolean|null|undefined;
+    connectedCallback(): void;
+
+    /**
+     * Overrides PaperInkyBehavior
+     */
+    ensureRipple(): void;
+    _updateCheckedAria(checked: any): void;
+  }
 
   /**
-   * Overrides PaperInkyBehavior
+   * `anypoint-radio-button`
+   *
+   * Anypoint styled radio button.
+   *
+   * ## Usage
+   *
+   * Install element:
+   *
+   * ```
+   * npm i --save @anypoint-components/anypoint-radio-button
+   * ```
+   *
+   * Import into your app:
+   *
+   * ```html
+   * <script type="module" src="node_modules/@anypoint-components/anypoint-radio-button.js"></script>
+   * ```
+   *
+   * Or into another component
+   *
+   * ```javascript
+   * import '@anypoint-components/anypoint-radio-button.js';
+   * ```
+   *
+   * Use it:
+   *
+   * ```html
+   * <paper-radio-group selectable="anypoint-radio-button">
+   *  <anypoint-radio-button name="a">Apple</anypoint-radio-button>
+   *  <anypoint-radio-button name="b">Banana</anypoint-radio-button>
+   *  <anypoint-radio-button name="c">Orange</anypoint-radio-button>
+   * </paper-radio-group>
+   * ```
+   *
+   * ### Styling
+   *
+   * `<anypoint-radio-button>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`
+   * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `#989a9b`
+   * `--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`
+   * `--anypoint-radio-button-checked-color` | Checked button selection color | `#00a2df`
+   * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`
+   * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
+   * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
+   * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
    */
-  ensureRipple(): void;
-  _updateCheckedAria(checked: any): void;
+  class AnypointRadioButton extends Polymer.Element {
+
+    /**
+     * Overrides PaperInkyBehavior
+     */
+    readonly noink: boolean|null|undefined;
+    connectedCallback(): void;
+
+    /**
+     * Overrides PaperInkyBehavior
+     */
+    ensureRipple(): void;
+    _updateCheckedAria(checked: any): void;
+  }
 }
 
 interface HTMLElementTagNameMap {
-  "anypoint-radio-button": AnypointRadioButton;
-  "anypoint-radio-button": AnypointRadioButton;
-}
-
-/**
- * `anypoint-radio-button`
- *
- * Anypoint styled radio button.
- *
- * ## Usage
- *
- * Install element:
- *
- * ```
- * npm i --save @anypoint-components/anypoint-radio-button
- * ```
- *
- * Import into your app:
- *
- * ```html
- * <script type="module" src="node_modules/@anypoint-components/anypoint-radio-button.js"></script>
- * ```
- *
- * Or into another component
- *
- * ```javascript
- * import '@anypoint-components/anypoint-radio-button.js';
- * ```
- *
- * Use it:
- *
- * ```html
- * <paper-radio-group selectable="anypoint-radio-button">
- *  <anypoint-radio-button name="a">Apple</anypoint-radio-button>
- *  <anypoint-radio-button name="b">Banana</anypoint-radio-button>
- *  <anypoint-radio-button name="c">Orange</anypoint-radio-button>
- * </paper-radio-group>
- * ```
- *
- * ### Styling
- *
- * `<anypoint-radio-button>` provides the following custom properties and mixins for styling:
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`
- * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `#989a9b`
- * `--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`
- * `--anypoint-radio-button-checked-color` | Checked button selection color | `#00a2df`
- * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`
- * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
- * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
- * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
- */
-declare class AnypointRadioButton extends Polymer.Element {
-
-  /**
-   * Overrides PaperInkyBehavior
-   */
-  readonly noink: boolean|null|undefined;
-  connectedCallback(): void;
-
-  /**
-   * Overrides PaperInkyBehavior
-   */
-  ensureRipple(): void;
-  _updateCheckedAria(checked: any): void;
+  "anypoint-radio-button": AnypointComponents.AnypointRadioButton;
+  "anypoint-radio-button": AnypointComponents.AnypointRadioButton;
 }
