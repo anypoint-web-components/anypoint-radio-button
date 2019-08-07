@@ -23,11 +23,11 @@ npm i --save @anypoint-web-components/anypoint-radio-button
     </script>
   </head>
   <body>
-    <paper-radio-group selectable="anypoint-radio-button">
+    <anypoint-radio-group selectable="anypoint-radio-button">
        <anypoint-radio-button name="a">Apple</anypoint-radio-button>
        <anypoint-radio-button name="b">Banana</anypoint-radio-button>
        <anypoint-radio-button name="c">Orange</anypoint-radio-button>
-    </paper-radio-group>
+    </anypoint-radio-group>
   </body>
 </html>
 ```
