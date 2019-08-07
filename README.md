@@ -1,53 +1,53 @@
+[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-radio-button.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-radio-button)
+
+[![Build Status](https://travis-ci.org/anypoint-web-components/anypoint-radio-button.svg?branch=stage)](https://travis-ci.org/anypoint-web-components/anypoint-radio-button)
+
 # `<anypoint-radio-button>`
 
-Anypoint styled radio button
+Accessible radio button and radio buttons group for Anypoint platform
 
 ## Usage
 
-Install element:
-
 ```
-npm i --save @anypoint-components/anypoint-radio-button
+npm i --save @anypoint-web-components/anypoint-radio-button
 ```
 
-Import into your app:
+### In an HTML file
 
 ```html
-<script type="module" src="node_modules/@anypoint-components/anypoint-radio-button.js"></script>
-```
-
-Or into another component
-
-```javascript
-import '@anypoint-components/anypoint-radio-button.js';
-```
-
-Use it:
-
-```html
-<paper-radio-group selectable="anypoint-radio-button">
- <anypoint-radio-button name="a">Apple</anypoint-radio-button>
- <anypoint-radio-button name="b">Banana</anypoint-radio-button>
- <anypoint-radio-button name="c">Orange</anypoint-radio-button>
-</paper-radio-group>
+<html>
+  <head>
+    <script type="module">
+      import '@anypoint-web-components/anypoint-radio-button/anypoint-radio-button.js';
+      import '@anypoint-web-components/anypoint-radio-button/anypoint-radio-group.js';
+    </script>
+  </head>
+  <body>
+    <paper-radio-group selectable="anypoint-radio-button">
+       <anypoint-radio-button name="a">Apple</anypoint-radio-button>
+       <anypoint-radio-button name="b">Banana</anypoint-radio-button>
+       <anypoint-radio-button name="c">Orange</anypoint-radio-button>
+    </paper-radio-group>
+  </body>
+</html>
 ```
 
 ## Development
 
-### Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) and npm (packaged with [Node.js](https://nodejs.org)) installed. Run `npm install` to install your element's dependencies, then run `polymer serve` to serve your element locally.
-
-### Viewing Your Element
-
-```
-$ polymer serve
+```sh
+git clone https://github.com/anypoint-web-components/anypoint-radio-button
+cd anypoint-radio-button
+npm install
 ```
 
-### Running Tests
+### Running the demo locally
 
-```
-$ polymer test
+```sh
+npm start
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+### Running the tests
+
+```sh
+npm test
+```
