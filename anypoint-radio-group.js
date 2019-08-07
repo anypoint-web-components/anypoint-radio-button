@@ -56,7 +56,7 @@ class AnypointRadioGroup extends HTMLElement {
   connectedCallback() {
     this.style.display = 'inline-block';
     this.style.verticalAlign = 'middle';
-
+    this.setAttribute('role', 'radiogroup');
     const config = {
       attributes: true,
       childList: true,
@@ -75,20 +75,21 @@ class AnypointRadioGroup extends HTMLElement {
   /**
    * Processes mutations to the light DOM of this element.
    * Processes added and removed nodes and changes to attributes.
-   * @param {Array<MutationRecord>} changes List of changes discovered by
+   * @param {Array<MutationRecord>} mutationsList List of changes discovered by
    * `MutationObserver`
    */
-  _nodesChanged(changes) {
-    const record = changes[0];
-    switch (record.type) {
-      case 'attributes':
-        this._processNodeAttributeChange(record);
-        break;
-      case 'childList':
-        this._processAddedNodes(record.addedNodes);
-        this._processRemovedNodes(record.removedNodes);
-        this._manageNodesSelection(record.addedNodes);
-        break;
+  _nodesChanged(mutationsList) {
+    for (const mutation of mutationsList) {
+      switch (mutation.type) {
+        case 'attributes':
+          this._processNodeAttributeChange(mutation);
+          break;
+        case 'childList':
+          this._processAddedNodes(mutation.addedNodes);
+          this._processRemovedNodes(mutation.removedNodes);
+          this._manageNodesSelection(mutation.addedNodes);
+          break;
+      }
     }
   }
   /**
@@ -257,7 +258,7 @@ class AnypointRadioGroup extends HTMLElement {
     const nodes = this.elements;
     for (let i = 0, len = nodes.length; i < len; i++) {
       const node = nodes[i];
-      if (node.name === name && node !== target && node.checked) {
+      if (node.name !== name && node !== target && node.checked) {
         node.checked = false;
       }
     }

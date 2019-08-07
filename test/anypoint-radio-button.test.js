@@ -1,9 +1,7 @@
 import { fixture, assert, aTimeout } from '@open-wc/testing';
 import sinon from 'sinon/pkg/sinon-esm.js';
 import '../anypoint-radio-button.js';
-import '@polymer/iron-test-helpers/mock-interactions.js';
-
-/* global MockInteractions  */
+import * as MockInteractions from '@polymer/iron-test-helpers/mock-interactions.js';
 
 describe('<anypoint-radio-button>', function() {
   async function basicFixture() {
