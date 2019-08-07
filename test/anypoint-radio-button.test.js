@@ -1,5 +1,4 @@
 import { fixture, assert, aTimeout } from '@open-wc/testing';
-import { a11ySuite } from '@advanced-rest-client/a11y-suite/index.js';
 import sinon from 'sinon/pkg/sinon-esm.js';
 import '../anypoint-radio-button.js';
 import '@polymer/iron-test-helpers/mock-interactions.js';
@@ -130,12 +129,6 @@ describe('<anypoint-radio-button>', function() {
   });
 
   describe('a11y', () => {
-    a11ySuite('Normal state', '<anypoint-radio-button>Label</anypoint-radio-button>');
-    a11ySuite('Disabled state', '<anypoint-radio-button disabled>Label</anypoint-radio-button>');
-    a11ySuite('Checked state', '<anypoint-radio-button checked>Label</anypoint-radio-button>');
-    a11ySuite('No label', '<anypoint-radio-button></anypoint-radio-button>');
-    a11ySuite('Aria label', '<anypoint-radio-button aria-label="Batman">Robin</anypoint-radio-button>');
-
     it('Sets default role attribute', async () => {
       const element = await basicFixture();
       assert.equal(element.getAttribute('role'), 'radio');
@@ -154,6 +147,31 @@ describe('<anypoint-radio-button>', function() {
     it('Respects existing tabindex attribute', async () => {
       const element = await tabindexFixture();
       assert.equal(element.getAttribute('tabindex'), '-1');
+    });
+
+    it('is accessible for normal state', async () => {
+      const element = await fixture(`<anypoint-radio-button>Label</anypoint-radio-button>`);
+      await assert.isAccessible(element);
+    });
+
+    it('is accessible for disabled state', async () => {
+      const element = await fixture(`<anypoint-radio-button disabled>Label</anypoint-radio-button>`);
+      await assert.isAccessible(element);
+    });
+
+    it('is accessible for checked state', async () => {
+      const element = await fixture(`<anypoint-radio-button checked>Label</anypoint-radio-button>`);
+      await assert.isAccessible(element);
+    });
+
+    it('is not accessible when no label', async () => {
+      const element = await fixture(`<anypoint-radio-button></anypoint-radio-button>`);
+      await assert.isNotAccessible(element);
+    });
+
+    it('is accessible with aria-label', async () => {
+      const element = await fixture(`<anypoint-radio-button aria-label="Batman">Robin</anypoint-radio-button>`);
+      await assert.isAccessible(element);
     });
   });
 });

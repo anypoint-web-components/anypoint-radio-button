@@ -225,7 +225,9 @@ class AnypointRadioButton extends CheckedElementMixin(LitElement) {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'radio');
     }
@@ -242,7 +244,9 @@ class AnypointRadioButton extends CheckedElementMixin(LitElement) {
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
+    if (super.disconnectedCallback) {
+      super.disconnectedCallback();
+    }
     this.addEventListener('keydown', this._keyDownHandler);
     this.addEventListener('click', this._clickHandler);
   }

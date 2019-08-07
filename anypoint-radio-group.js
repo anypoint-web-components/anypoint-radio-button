@@ -51,12 +51,12 @@ class AnypointRadioGroup extends HTMLElement {
     super();
     this._nodesChanged = this._nodesChanged.bind(this);
     this._radioAction = this._radioAction.bind(this);
-
-    this.style.display = 'inline-block';
-    this.style.verticalAlign = 'middle';
   }
 
   connectedCallback() {
+    this.style.display = 'inline-block';
+    this.style.verticalAlign = 'middle';
+
     const config = {
       attributes: true,
       childList: true,
