@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "@anypoint-web-components/anypoint-form-mixins": "^1.0.1",
+    "@anypoint-web-components/anypoint-menu-mixin": "^1.0.0",
+    "@anypoint-web-components/anypoint-styles": "^1.0.0-preview.1",
     "lit-element": "^2.0.1"
   },
   "devDependencies": {
@@ -37,7 +39,7 @@
     "@advanced-rest-client/eslint-config": "^1.0.6",
     "@advanced-rest-client/prettier-config": "^0.1.0",
     "@advanced-rest-client/testing-karma-sl": "^1.0.3",
-    "@anypoint-web-components/anypoint-styles": "^1.0.0-preview.1",
+    "@anypoint-web-components/anypoint-checkbox": "^1.0.0",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^7.0.0",
     "@open-wc/testing": "^2.2.1",

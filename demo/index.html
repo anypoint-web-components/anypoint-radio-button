@@ -1,65 +1,33 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-    <title>anypoint-radio-button demo</title>
-    <script type="module" src="../node_modules/@advanced-rest-client/arc-demo-helper/arc-demo-helper.js"></script>
-    <script type="module" src="../node_modules/@anypoint-web-components/anypoint-styles/colors.js"></script>
-    <script type="module" src="../anypoint-radio-button.js"></script>
-    <script type="module" src="../anypoint-radio-group.js"></script>
-
-    <style>
-    label {
-      display: inline-flex;
-      flex-direction: row;
-      align-items: center;
-      height: 32px;
-      vertical-align: top;
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <title>anypoint-radio-button demo</title>
+  <style>
+    .centered[role="main"] {
+      max-width: 1400px;
     }
-    </style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h2>Radio button</h2>
 
-      <h3>Regular buttons</h3>
-      <arc-demo-helper>
-        <template>
-          <anypoint-radio-button>Apple</anypoint-radio-button>
-          <anypoint-radio-button checked>Banana</anypoint-radio-button>
-          <anypoint-radio-button disabled>Orange (this is disabled!)</anypoint-radio-button>
-          <anypoint-radio-button checked disabled>Pear (this is disabled and checked)</anypoint-radio-button>
-          <anypoint-radio-button dir="rtl">Raspberry</anypoint-radio-button>
-        </template>
-      </arc-demo-helper>
+    .block-label {
+      display: block;
+    }
 
-      <h2>Radio group</h2>
+    details summary {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin: 12px 0px;
+    }
 
-      <h3>Buttons in radio group</h3>
-      <arc-demo-helper>
-        <template>
-          <label id="label1">Fruits:</label>
-          <anypoint-radio-group aria-labelledby="label1" selected="b" selectable="anypoint-radio-button">
-            <anypoint-radio-button name="fruit">Apple</anypoint-radio-button>
-            <anypoint-radio-button name="fruit" checked>Banana</anypoint-radio-button>
-            <anypoint-radio-button name="fruit" disabled>Orange (this is disabled!)</anypoint-radio-button>
-            <label><input type="radio" name="fruit"/>I am native</label>
-          </anypoint-radio-group>
-        </template>
-      </arc-demo-helper>
-
-      <h3>Only last radio button is selected</h3>
-      <arc-demo-helper>
-        <template>
-          <label id="label1">Fruits:</label>
-          <anypoint-radio-group aria-labelledby="label1" selected="b" selectable="anypoint-radio-button">
-            <anypoint-radio-button name="fruit">Apple</anypoint-radio-button>
-            <anypoint-radio-button name="fruit" checked>Banana</anypoint-radio-button>
-            <anypoint-radio-button name="fruit" checked>Orange</anypoint-radio-button>
-          </anypoint-radio-group>
-        </template>
-      </arc-demo-helper>
-    </div>
-  </body>
+    .styled h4 {
+      margin: 40px 0 24px 0;
+    }
+  </style>
+</head>
+<body class="styled">
+  <div id="demo"></div>
+  <script type="module" src="./index.js"></script>
+</body>
 </html>
