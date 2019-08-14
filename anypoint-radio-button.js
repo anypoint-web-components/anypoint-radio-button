@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit-element';
 import { CheckedElementMixin } from '@anypoint-web-components/anypoint-form-mixins/anypoint-form-mixins.js';
+import '@anypoint-web-components/anypoint-styles/colors.js';
 /**
  * `anypoint-radio-button`
  *
@@ -64,6 +65,7 @@ class AnypointRadioButton extends CheckedElementMixin(LitElement) {
       line-height: 0;
       white-space: nowrap;
       cursor: pointer;
+      vertical-align: middle;
     }
 
     :host(:focus) {
@@ -186,8 +188,9 @@ class AnypointRadioButton extends CheckedElementMixin(LitElement) {
       margin-left: 8px;
     }
 
-    :host([disabled]) #radioLabel {
-      opacity: 0.65;
+    :host([disabled]) .radioLabel {
+      pointer-events: none;
+      color: var(--anypoint-radio-button-disabled-color, #a8a8a8);
     }
     `;
   }
@@ -286,6 +289,9 @@ class AnypointRadioButton extends CheckedElementMixin(LitElement) {
    * Performs a click operation in next macrotask.
    */
   _asyncClick() {
+    if (this.disabled) {
+      return;
+    }
     setTimeout(() => this.click(), 1);
   }
   /**
