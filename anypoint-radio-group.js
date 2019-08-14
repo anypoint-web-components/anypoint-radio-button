@@ -1,3 +1,5 @@
+import { LitElement } from 'lit-element';
+import { AnypointMenuMixin } from '@anypoint-web-components/anypoint-menu-mixin/anypoint-menu-mixin.js';
 /**
  * A web component that groups custom radio buttons and handles selection inside
  * the group.
@@ -33,12 +35,9 @@
  * @customElement
  * @extends HTMLElement
  */
-class AnypointRadioGroup extends HTMLElement {
-  /**
-   * @return {Node|undefined} Currently selected radio button.
-   */
-  get selected() {
-    return this._selected;
+class AnypointRadioGroup extends AnypointMenuMixin(LitElement) {
+  createRenderRoot() {
+    return this;
   }
   /**
    * @return {NodeList} List of radio button nodes.
@@ -49,58 +48,20 @@ class AnypointRadioGroup extends HTMLElement {
 
   constructor() {
     super();
-    this._nodesChanged = this._nodesChanged.bind(this);
-    this._radioAction = this._radioAction.bind(this);
+    this.multi = false;
   }
 
   connectedCallback() {
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
     this.style.display = 'inline-block';
     this.style.verticalAlign = 'middle';
     this.setAttribute('role', 'radiogroup');
-    const config = {
-      attributes: true,
-      childList: true,
-      subtree: true
-    };
-    this._observer = new MutationObserver(this._nodesChanged);
-    this._observer.observe(this, config);
-    this._discoverNodes();
-  }
-
-  disconnectedCallback() {
-    this._observer.disconnect();
-    this._observer = null;
-    this._removeListeners();
-  }
-  /**
-   * Processes mutations to the light DOM of this element.
-   * Processes added and removed nodes and changes to attributes.
-   * @param {Array<MutationRecord>} mutationsList List of changes discovered by
-   * `MutationObserver`
-   */
-  _nodesChanged(mutationsList) {
-    for (const mutation of mutationsList) {
-      switch (mutation.type) {
-        case 'attributes':
-          this._processNodeAttributeChange(mutation);
-          break;
-        case 'childList':
-          this._processAddedNodes(mutation.addedNodes);
-          this._processRemovedNodes(mutation.removedNodes);
-          this._manageNodesSelection(mutation.addedNodes);
-          break;
-      }
-    }
-  }
-  /**
-   * This to be run when element is inserted into the DOM.
-   * It discovers radio buttons in light DOM and manages the sate.
-   */
-  _discoverNodes() {
-    const nodes = this.elements;
-    if (nodes.length) {
-      this._processAddedNodes(nodes);
-      this._manageNodesSelection(nodes);
+    this.selectable = '[role=radio],input[type=radio]';
+    this._ensureSingleSelection();
+    if (this.disabled) {
+      this._disabledChanged(this.disabled);
     }
   }
   /**
@@ -115,40 +76,13 @@ class AnypointRadioGroup extends HTMLElement {
       return;
     }
     const target = record.target;
+    if (target === this) {
+      return;
+    }
     if (target.getAttribute('role') === 'radio') {
       this._processAddedNodes([target]);
     } else {
       this._nodeRemoved(target);
-    }
-  }
-  /**
-   * Processes new and existing nodes and makes single selection from multiple selected
-   * radio buttons. If arriving `nodes` has selected nodes the last selected node in
-   * the selection keeps the selection.
-   *
-   * @param {NodeList?} nodes Optional list of newly added nodes to the light DOM.
-   */
-  _manageNodesSelection(nodes) {
-    let selected = this._lastSelected(nodes);
-    const domNodes = this.elements;
-    if (!selected) {
-      selected = this._lastSelected(domNodes);
-    }
-    if (!selected) {
-      return;
-    }
-    this._selected = selected;
-    for (let i = domNodes.length - 1; i >= 0; i--) {
-      const node = domNodes[i];
-      if (!this._isRadioButton(node)) {
-        continue;
-      }
-      if (node.disabled || !node.checked) {
-        continue;
-      }
-      if (node !== selected && node.checked) {
-        node.checked = false;
-      }
     }
   }
   /**
@@ -167,25 +101,6 @@ class AnypointRadioGroup extends HTMLElement {
     return false;
   }
   /**
-   * @param {NodeList?} nodes Optional list of nodes to check for selection.
-   * @return {Node} Last selected node or undefined when no selection is detected.
-   */
-  _lastSelected(nodes) {
-    if (!nodes || !nodes.length) {
-      return;
-    }
-    for (let i = nodes.length - 1; i >= 0; i--) {
-      const node = nodes[i];
-      if (!this._isRadioButton(node)) {
-        continue;
-      }
-      if (node.disabled || !node.checked) {
-        continue;
-      }
-      return node;
-    }
-  }
-  /**
    * Adds `change` event listener to detected radio buttons.
    * A button is considered as a radio button when its `role` is `radio`.
    *
@@ -194,13 +109,10 @@ class AnypointRadioGroup extends HTMLElement {
   _processAddedNodes(nodes) {
     for (let i = 0, len = nodes.length; i < len; i++) {
       const node = nodes[i];
-      if (!this._isRadioButton(node)) {
+      if (node === this || !this._isRadioButton(node)) {
         continue;
       }
-      // The event may have been already added when the attribute has been set
-      // with the same name again.
-      node.removeEventListener('change', this._radioAction);
-      node.addEventListener('change', this._radioAction);
+      node.setAttribute('tabindex', '-1');
     }
   }
   /**
@@ -211,7 +123,7 @@ class AnypointRadioGroup extends HTMLElement {
   _processRemovedNodes(nodes) {
     for (let i = 0, len = nodes.length; i < len; i++) {
       const node = nodes[i];
-      if (!this._isRadioButton(node)) {
+      if (node === this || !this._isRadioButton(node)) {
         continue;
       }
       this._nodeRemoved(node);
@@ -224,44 +136,98 @@ class AnypointRadioGroup extends HTMLElement {
    * @param {Node} node Removed node
    */
   _nodeRemoved(node) {
-    node.removeEventListener('change', this._radioAction);
-    if (node === this._selected) {
-      this._selected = undefined;
+    const { selected } = this;
+    if ((selected || selected === 0) && this._valueForItem(node) === selected) {
+      this.selected = undefined;
     }
   }
   /**
-   * Remove listeners from all current `elements`.
+   * Overrides `AnypointMenuMixin._onKeydown`. Adds right / left arrows support.
+   * @param {KeyboardEvent} e
    */
-  _removeListeners() {
-    const nodes = this.elements;
-    for (let i = 0, len = nodes.length; i < len; i++) {
-      nodes[i].removeEventListener('change', this._radioAction);
+  _onKeydown(e) {
+    if (e.key === 'ArrowRight') {
+      this._onDownKey(e);
+      e.stopPropagation();
+    } else if (e.key === 'ArrowLeft') {
+      this._onUpKey(e);
+      e.stopPropagation();
+    } else {
+      super._onKeydown(e);
     }
   }
   /**
-   * Handler for radio's `change` event.
-   * @param {Event} e
+   * Overrides `AnypointSelectableMixin._applySelection` to manage item's checked
+   * state.
+   * @param {Node} item Selected / deselected item.
+   * @param {Boolean} isSelected True if the item is selected
    */
-  _radioAction(e) {
-    const target = e.target;
-    if (!target.checked) {
-      return;
-    }
-    this._selected = target;
-    const name = target.name;
-    if (!name) {
-      return;
-    }
-    // Normally you would use querySelectorAll with [name="${name}"]
-    // but the name can be anything, including invalid selectors causing
-    // error. This queries for all checkboxes and compares names manually.
-    const nodes = this.elements;
-    for (let i = 0, len = nodes.length; i < len; i++) {
-      const node = nodes[i];
-      if (node.name !== name && node !== target && node.checked) {
-        node.checked = false;
+  _applySelection(item, isSelected) {
+    super._applySelection(item, isSelected);
+    item.checked = isSelected;
+  }
+  /**
+   * Ensures that the last child element is checked in the group.
+   */
+  _ensureSingleSelection() {
+    const nodes = this._items;
+    let checked = false;
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const currentChecked = nodes[i].checked;
+      if (currentChecked && !checked) {
+        checked = true;
+        if (this.attrForSelected) {
+          const value = this._valueForItem(nodes[i]);
+          this.select(value);
+        } else {
+          this.select(i);
+        }
+      } else if (currentChecked && checked) {
+        this._applySelection(nodes[i], false);
       }
     }
+  }
+  /**
+   * Overrides `AnypointSelectableMixin._mutationHandler`.
+   * Processes dynamically added nodes and updates selection if needed.
+   * @param {Array<MutationRecord>} mutationsList A list of changes record
+   */
+  _mutationHandler(mutationsList) {
+    for (const mutation of mutationsList) {
+      if (mutation.type === 'attributes') {
+        this._processNodeAttributeChange(mutation);
+      } else if (mutation.type === 'childList') {
+        if (mutation.addedNodes && mutation.addedNodes.length) {
+          this._ensureSingleSelection();
+        }
+        if (mutation.removedNodes && mutation.removedNodes.length) {
+          this._processRemovedNodes(mutation.removedNodes);
+        }
+      }
+    }
+    super._mutationHandler(mutationsList);
+  }
+  /**
+   * Overrides `AnypointSelectableMixin._observeItems` to include subtree.
+   * @return {MutationObserver}
+   */
+  _observeItems() {
+    const config = {
+      attributes: true,
+      childList: true,
+      subtree: true
+    };
+    const observer = new MutationObserver(this._mutationHandler);
+    observer.observe(this, config);
+    return observer;
+  }
+  /**
+   * Disables children when disabled state changes
+   * @param {Boolean} disabled
+   */
+  _disabledChanged(disabled) {
+    super._disabledChanged(disabled);
+    this.items.forEach((node) => node.disabled = disabled);
   }
 }
 window.customElements.define('anypoint-radio-group', AnypointRadioGroup);
