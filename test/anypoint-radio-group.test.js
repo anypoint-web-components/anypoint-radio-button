@@ -300,6 +300,12 @@ describe('<anypoint-radio-group>', function() {
       const result = element._isRadioButton(node);
       assert.isFalse(result);
     });
+
+    it('resturns false for nodes other than element', () => {
+      const node = document.createComment('test');
+      const result = element._isRadioButton(node);
+      assert.isFalse(result);
+    });
   });
 
   describe('a11y', () => {

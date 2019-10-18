@@ -92,6 +92,9 @@ class AnypointRadioGroup extends AnypointMenuMixin(LitElement) {
    * "radio" type.
    */
   _isRadioButton(node) {
+    if (node.nodeType !== Node.ELEMENT_NODE) {
+      return false;
+    }
     if (node.getAttribute('role') === 'radio') {
       return true;
     }
