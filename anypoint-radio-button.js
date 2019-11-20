@@ -56,7 +56,7 @@ import '@anypoint-web-components/anypoint-styles/colors.js';
  * @memberof AnypointComponents
  */
 class AnypointRadioButton extends CheckedElementMixin(LitElement) {
-  static get styles() {
+  get styles() {
     return css`
     :host {
       display: inline-flex;
@@ -196,7 +196,7 @@ class AnypointRadioButton extends CheckedElementMixin(LitElement) {
   }
 
   render() {
-    return html`
+    return html`<style>${this.styles}</style>
       <div class="radio-container">
         <div class="state-container">
           <div id="offRadio"></div>
