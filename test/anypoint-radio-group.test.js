@@ -4,9 +4,9 @@ import '../anypoint-radio-button.js';
 
 import * as MockInteractions from '@polymer/iron-test-helpers/mock-interactions.js';
 
-describe('<anypoint-radio-group>', function() {
+describe('<anypoint-radio-group>', () => {
   async function basicFixture() {
-    return (await fixture(html`<anypoint-radio-group>
+    return (fixture(html`<anypoint-radio-group>
        <anypoint-radio-button name="a">Apple</anypoint-radio-button>
        <anypoint-radio-button name="b">Banana</anypoint-radio-button>
        <anypoint-radio-button name="c">Orange</anypoint-radio-button>
@@ -14,7 +14,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function selectedFixture() {
-    return (await fixture(html`<anypoint-radio-group>
+    return (fixture(html`<anypoint-radio-group>
       <anypoint-radio-button name="a" checked>Apple</anypoint-radio-button>
       <anypoint-radio-button name="b">Banana</anypoint-radio-button>
       <anypoint-radio-button name="c">Orange</anypoint-radio-button>
@@ -22,7 +22,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function ignoredFixture() {
-    return (await fixture(html`<anypoint-radio-group>
+    return (fixture(html`<anypoint-radio-group>
        <anypoint-radio-button checked name="a">Apple</anypoint-radio-button>
        <anypoint-radio-button name="b">Banana</anypoint-radio-button>
        <anypoint-radio-button name="c">Orange</anypoint-radio-button>
@@ -31,7 +31,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function mixedFixture() {
-    return (await fixture(html`<anypoint-radio-group>
+    return (fixture(html`<anypoint-radio-group>
        <anypoint-radio-button checked name="a">Apple</anypoint-radio-button>
        <anypoint-radio-button name="b">Banana</anypoint-radio-button>
        <anypoint-radio-button name="c">Orange</anypoint-radio-button>
@@ -40,7 +40,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function selected2Fixture() {
-    return (await fixture(html`<anypoint-radio-group selected="1">
+    return (fixture(html`<anypoint-radio-group selected="1">
        <anypoint-radio-button name="a">Apple</anypoint-radio-button>
        <anypoint-radio-button name="b">Banana</anypoint-radio-button>
        <anypoint-radio-button name="c">Orange</anypoint-radio-button>
@@ -48,7 +48,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function multiCheckedFixture() {
-    return (await fixture(html`<anypoint-radio-group>
+    return (fixture(html`<anypoint-radio-group>
        <anypoint-radio-button checked name="a">Apple</anypoint-radio-button>
        <anypoint-radio-button name="b">Banana</anypoint-radio-button>
        <anypoint-radio-button checked name="c">Orange</anypoint-radio-button>
@@ -56,7 +56,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function attrForSelectedFixture() {
-    return (await fixture(html`<anypoint-radio-group selected="banana" attrforselected="label">
+    return (fixture(html`<anypoint-radio-group selected="banana" attrforselected="label">
       <anypoint-radio-button name="a" label="apple">Apple</anypoint-radio-button>
       <anypoint-radio-button name="b" label="banana">Banana</anypoint-radio-button>
       <anypoint-radio-button name="c" label="orange">Orange</anypoint-radio-button>
@@ -64,7 +64,7 @@ describe('<anypoint-radio-group>', function() {
   }
 
   async function disabledFixture() {
-    return (await fixture(html`<anypoint-radio-group disabled>
+    return (fixture(html`<anypoint-radio-group disabled>
       <anypoint-radio-button>Apple</anypoint-radio-button>
       <anypoint-radio-button>Banana</anypoint-radio-button>
       <anypoint-radio-button>Orange</anypoint-radio-button>
@@ -261,50 +261,10 @@ describe('<anypoint-radio-group>', function() {
     it('ignores selection when disabled', async () => {
       const element = await disabledFixture();
       const node = element.querySelector('anypoint-radio-button');
-      assert.isTrue(node.disabled);
+      assert.isTrue(node.disabled, 'radio is initially disabled');
+      assert.isFalse(node.checked, 'radio is initially not checked');
       MockInteractions.tap(node);
-      assert.isFalse(node.checked);
-    });
-  });
-
-  describe('_isRadioButton()', () => {
-    let element;
-    beforeEach(async () => {
-      element = await basicFixture();
-    });
-
-    it('return true when has radio role', () => {
-      const node = document.createElement('span');
-      node.setAttribute('role', 'radio');
-      const result = element._isRadioButton(node);
-      assert.isTrue(result);
-    });
-
-    it('return true for radio input', () => {
-      const node = document.createElement('input');
-      node.type = 'radio';
-      const result = element._isRadioButton(node);
-      assert.isTrue(result);
-    });
-
-    it('resturns false for other roles', () => {
-      const node = document.createElement('span');
-      node.setAttribute('role', 'display');
-      const result = element._isRadioButton(node);
-      assert.isFalse(result);
-    });
-
-    it('resturns false for other inputs', () => {
-      const node = document.createElement('input');
-      node.type = 'checkbox';
-      const result = element._isRadioButton(node);
-      assert.isFalse(result);
-    });
-
-    it('resturns false for nodes other than element', () => {
-      const node = document.createComment('test');
-      const result = element._isRadioButton(node);
-      assert.isFalse(result);
+      assert.isFalse(node.checked, 'radio is not checked');
     });
   });
 

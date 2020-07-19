@@ -1,6 +1,6 @@
 [![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-radio-button.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-radio-button)
 
-[![Build Status](https://travis-ci.org/anypoint-web-components/anypoint-radio-button.svg?branch=stage)](https://travis-ci.org/anypoint-web-components/anypoint-radio-button)
+[![Build Status](https://travis-ci.com/anypoint-web-components/anypoint-radio-button.svg)](https://travis-ci.com/anypoint-web-components/anypoint-radio-button)
 
 # `<anypoint-radio-button>`
 
