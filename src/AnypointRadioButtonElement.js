@@ -49,7 +49,7 @@ import radioStyles from './radio.styles.js';
  * `--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `--anypoint-color-aluminum5`
  * `--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`
  * `--anypoint-radio-button-checked-color` | Checked button selection color | `--anypoint-color-coreBlue3`
- * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner cicrcle background color | `#fff`
+ * `--anypoint-radio-button-checked-inner-background-color` | Checked button inner circle background color | `#fff`
  * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
  * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
  * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
@@ -154,7 +154,7 @@ export class AnypointRadioButtonElement extends CheckedElementMixin(LitElement) 
   }
 
   /**
-   * Performs a click operation in next macrotask.
+   * Performs a click operation in next macro-task.
    */
   _asyncClick() {
     if (this.disabled) {

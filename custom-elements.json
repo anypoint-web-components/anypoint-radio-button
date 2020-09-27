@@ -1,0 +1,381 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "anypoint-radio-button",
+      "path": "./anypoint-radio-button.js",
+      "description": "`anypoint-radio-button`\n\nAnypoint styled radio button.\n\n## Usage\n\nInstall element:\n\n```\nnpm i --save @anypoint-components/anypoint-radio-button\n```\n\nImport into your app:\n\n```html\n<script type=\"module\" src=\"node_modules/@anypoint-components/anypoint-radio-button.js\"></script>\n```\n\nOr into another component\n\n```javascript\nimport '@anypoint-components/anypoint-radio-button.js';\n```\n\nUse it:\n\n```html\n<paper-radio-group selectable=\"anypoint-radio-button\">\n  <anypoint-radio-button name=\"a\">Apple</anypoint-radio-button>\n  <anypoint-radio-button name=\"b\">Banana</anypoint-radio-button>\n  <anypoint-radio-button name=\"c\">Orange</anypoint-radio-button>\n</paper-radio-group>\n```\n\n### Styling\n\n`<anypoint-radio-button>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--anypoint-radio-button-radio-container` | A mixin applied to the internal radio container | `{}`\n`--anypoint-radio-button-unchecked-color` | Border color of unchecked button | `--anypoint-color-aluminum5`\n`--anypoint-radio-button-unchecked-background-color` | Unchecked button background color | `transparent`\n`--anypoint-radio-button-checked-color` | Checked button selection color | `--anypoint-color-coreBlue3`\n`--anypoint-radio-button-checked-inner-background-color` | Checked button inner circle background color | `#fff`\n`--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`\n`--anypoint-radio-button-label-color` | Label color | `--primary-text-color`\n`--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`",
+      "attributes": [
+        {
+          "name": "checked",
+          "description": "Controls whether this button is in checked state.",
+          "type": "boolean"
+        },
+        {
+          "name": "toggles",
+          "description": "If true, the button toggles the active state with each click or press\nof the space bar.",
+          "type": "boolean"
+        },
+        {
+          "name": "name",
+          "description": "The name of this form element.",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "description": "The value of this form control"
+        },
+        {
+          "name": "required",
+          "description": "Set to true to mark the input as required. If used in a form, a\ncustom element that uses this mixin should also use\nAnypointValidatableMixin and define a custom validation method.\nOtherwise, a `required` element will always be considered valid.\nIt's also strongly recommended to provide a visual style for the element\nwhen its value is invalid.",
+          "type": "boolean"
+        },
+        {
+          "name": "disabled",
+          "description": "Controls whether this button is in disabled state.",
+          "type": "boolean"
+        },
+        {
+          "name": "validator",
+          "description": "Name of the validator or validators to use.\nIf the element should be validated by more than one validator then separate names with\nspace. See docs for `ValidatorMixin` for description of how to define a\nvalidator.",
+          "type": "string"
+        },
+        {
+          "name": "invalid",
+          "description": "True if the last call to `validate` is invalid.",
+          "type": "boolean"
+        }
+      ],
+      "properties": [
+        {
+          "name": "styles",
+          "type": "CSSResult"
+        },
+        {
+          "name": "checked",
+          "attribute": "checked",
+          "description": "Controls whether this button is in checked state.",
+          "type": "boolean"
+        },
+        {
+          "name": "toggles",
+          "attribute": "toggles",
+          "description": "If true, the button toggles the active state with each click or press\nof the space bar.",
+          "type": "boolean"
+        },
+        {
+          "name": "name",
+          "attribute": "name",
+          "description": "The name of this form element.",
+          "type": "string"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "The value of this form control"
+        },
+        {
+          "name": "required",
+          "attribute": "required",
+          "description": "Set to true to mark the input as required. If used in a form, a\ncustom element that uses this mixin should also use\nAnypointValidatableMixin and define a custom validation method.\nOtherwise, a `required` element will always be considered valid.\nIt's also strongly recommended to provide a visual style for the element\nwhen its value is invalid.",
+          "type": "boolean"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "description": "Controls whether this button is in disabled state.",
+          "type": "boolean"
+        },
+        {
+          "name": "onchange",
+          "description": "An event listener for the `change` event or null to unregister",
+          "type": "EventListener"
+        },
+        {
+          "name": "validator",
+          "attribute": "validator",
+          "description": "Name of the validator or validators to use.\nIf the element should be validated by more than one validator then separate names with\nspace. See docs for `ValidatorMixin` for description of how to define a\nvalidator.",
+          "type": "string"
+        },
+        {
+          "name": "validationStates",
+          "description": "After calling `validate()` this is be populated by latest result of the\ntest for each validator. Result item contains following properties:\n\n- validator `string` Name of the validator\n- valid `boolean` Result of the test\n- message `string` Error message\n\nThis property is `undefined` if `validator` is not set.",
+          "type": "ValidationResult[]"
+        },
+        {
+          "name": "invalid",
+          "attribute": "invalid",
+          "description": "True if the last call to `validate` is invalid.",
+          "type": "boolean"
+        }
+      ],
+      "events": [
+        {
+          "name": "iron-change",
+          "description": "Deprecated"
+        },
+        {
+          "name": "checked-changed",
+          "description": "Deprecated"
+        },
+        {
+          "name": "change"
+        }
+      ]
+    },
+    {
+      "name": "anypoint-radio-group",
+      "path": "./anypoint-radio-group.js",
+      "description": "A web component that groups custom radio buttons and handles selection inside\nthe group.\n\nRequirements for children:\n- must have role=\"radio\" attribute\n- must have name attribute\n- radio state change must be notified via `change` event.\n\nRadio buttons with the same name inside their group will have single selection.\nThis means when selecting a radio button any other currently selected button\nwill be deselected.\n\nAlso. when initializing the component, only last selected component keeps the\nselection.\nWhen new checked radio button is inserted into the group the selection is passed to the newly\narriving element.\n\nThis behavior is consistent with native DOM API.\n\nThe group element exposes `selected` property that holds a reference to\ncurrently selected radio button.\n\nExample\n\n```\n<anypoint-radio-group>\n  <anypoint-radio-button name=\"option\"></anypoint-radio-button>\n  <other-control role=\"button\" name=\"option\" checked></other-control>\n</anypoint-radio-group>\n```",
+      "attributes": [
+        {
+          "name": "attrForItemTitle",
+          "description": "The attribute to use on menu items to look up the item title. Typing the\nfirst letter of an item when the menu is open focuses that item. If\nunset, `textContent` will be used.",
+          "type": "string | undefined"
+        },
+        {
+          "name": "disabled",
+          "description": "Whether or not this menu is disabled.",
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "useAriaSelected",
+          "description": "When set it adds `aria-selected` attribute to currently selected item.\n\nThe `aria-selected` attribute is invalid with default role of this\nelement (\"menu\"). If you manually change the role to some other that\naccepts `aria-selected` attribute on children then set this property.",
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "attrForSelected",
+          "description": "If you want to use an attribute value or property of an element for\n`selected` instead of the index, set this to the name of the attribute\nor property. Hyphenated values are converted to camel case when used to\nlook up the property of a selectable element. Camel cased values are\n*not* converted to hyphenated values for attribute lookup. It's\nrecommended that you provide the hyphenated form of the name so that\nselection works in both cases. (Use `attr-or-property-name` instead of\n`attrOrPropertyName`.)",
+          "type": "string"
+        },
+        {
+          "name": "selected",
+          "description": "Gets or sets the selected element. The default is to use the index of the item.",
+          "type": "string | number"
+        },
+        {
+          "name": "activateEvent",
+          "description": "The event that fires from items when they are selected. Selectable\nwill listen for this event from items and update the selection state.\nSet to empty string to listen to no events.",
+          "type": "string",
+          "default": "\"click\""
+        },
+        {
+          "name": "selectable",
+          "description": "This is a CSS selector string.  If this is set, only items that match the\nCSS selector are selectable.",
+          "type": "string"
+        },
+        {
+          "name": "selectedClass",
+          "description": "The class to set on elements when selected.",
+          "type": "string",
+          "default": "\"selected\""
+        },
+        {
+          "name": "selectedAttribute",
+          "description": "The attribute to set on elements when selected.",
+          "type": "string"
+        },
+        {
+          "name": "fallbackSelection",
+          "description": "Default fallback if the selection based on selected with `attrForSelected` is not found.",
+          "type": "string | number"
+        },
+        {
+          "name": "multi",
+          "description": "If true, multiple selections are allowed.",
+          "type": "boolean | undefined"
+        }
+      ],
+      "properties": [
+        {
+          "name": "elements",
+          "description": "List of radio button nodes.",
+          "type": "NodeList"
+        },
+        {
+          "name": "focusedItem",
+          "description": "Currently focused in the menu item.",
+          "type": "HTMLElement | undefined"
+        },
+        {
+          "name": "highlightedItem",
+          "description": "Currently highlighted item.",
+          "type": "HTMLElement"
+        },
+        {
+          "name": "attrForItemTitle",
+          "attribute": "attrForItemTitle",
+          "description": "The attribute to use on menu items to look up the item title. Typing the\nfirst letter of an item when the menu is open focuses that item. If\nunset, `textContent` will be used.",
+          "type": "string | undefined"
+        },
+        {
+          "name": "disabled",
+          "attribute": "disabled",
+          "description": "Whether or not this menu is disabled.",
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "useAriaSelected",
+          "attribute": "useAriaSelected",
+          "description": "When set it adds `aria-selected` attribute to currently selected item.\n\nThe `aria-selected` attribute is invalid with default role of this\nelement (\"menu\"). If you manually change the role to some other that\naccepts `aria-selected` attribute on children then set this property.",
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "attrForSelected",
+          "attribute": "attrForSelected",
+          "description": "If you want to use an attribute value or property of an element for\n`selected` instead of the index, set this to the name of the attribute\nor property. Hyphenated values are converted to camel case when used to\nlook up the property of a selectable element. Camel cased values are\n*not* converted to hyphenated values for attribute lookup. It's\nrecommended that you provide the hyphenated form of the name so that\nselection works in both cases. (Use `attr-or-property-name` instead of\n`attrOrPropertyName`.)",
+          "type": "string"
+        },
+        {
+          "name": "selected",
+          "attribute": "selected",
+          "description": "Gets or sets the selected element. The default is to use the index of the item.",
+          "type": "string | number"
+        },
+        {
+          "name": "selectedItem",
+          "description": "Returns the currently selected item.",
+          "type": "HTMLElement | undefined"
+        },
+        {
+          "name": "activateEvent",
+          "attribute": "activateEvent",
+          "description": "The event that fires from items when they are selected. Selectable\nwill listen for this event from items and update the selection state.\nSet to empty string to listen to no events.",
+          "type": "string",
+          "default": "\"click\""
+        },
+        {
+          "name": "selectable",
+          "attribute": "selectable",
+          "description": "This is a CSS selector string.  If this is set, only items that match the\nCSS selector are selectable.",
+          "type": "string"
+        },
+        {
+          "name": "selectedClass",
+          "attribute": "selectedClass",
+          "description": "The class to set on elements when selected.",
+          "type": "string",
+          "default": "\"selected\""
+        },
+        {
+          "name": "selectedAttribute",
+          "attribute": "selectedAttribute",
+          "description": "The attribute to set on elements when selected.",
+          "type": "string"
+        },
+        {
+          "name": "fallbackSelection",
+          "attribute": "fallbackSelection",
+          "description": "Default fallback if the selection based on selected with `attrForSelected` is not found.",
+          "type": "string | number"
+        },
+        {
+          "name": "items",
+          "description": "The list of items from which a selection can be made.",
+          "type": "HTMLElement[]"
+        },
+        {
+          "name": "onselectedchanged",
+          "type": "EventListener"
+        },
+        {
+          "name": "onselectedchange",
+          "type": "EventListener"
+        },
+        {
+          "name": "onselecteditemchanged",
+          "type": "EventListener"
+        },
+        {
+          "name": "onselecteditemchange",
+          "type": "EventListener"
+        },
+        {
+          "name": "onitemschanged",
+          "type": "EventListener"
+        },
+        {
+          "name": "onitemschange",
+          "type": "EventListener"
+        },
+        {
+          "name": "onselect",
+          "type": "EventListener"
+        },
+        {
+          "name": "ondeselect",
+          "type": "EventListener"
+        },
+        {
+          "name": "onactivate",
+          "type": "EventListener"
+        },
+        {
+          "name": "multi",
+          "attribute": "multi",
+          "description": "If true, multiple selections are allowed.",
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "selectedValues",
+          "description": "Gets or sets the selected elements. This is used instead of `selected`\nwhen `multi` is true.",
+          "type": "HTMLElement[]"
+        },
+        {
+          "name": "selectedItems",
+          "description": "An array of currently selected items.",
+          "type": "array"
+        },
+        {
+          "name": "onselectedvalueschanged",
+          "description": "Registers a callback function for `selectedvalues-changed` event",
+          "type": "EventListener | null"
+        },
+        {
+          "name": "onselectedvalueschange",
+          "description": "Registers a callback function for `selectedvalueschange` event",
+          "type": "EventListener | null"
+        },
+        {
+          "name": "onselecteditemschanged",
+          "description": "Registers a callback function for `selecteditems-changed` event",
+          "type": "EventListener | null"
+        },
+        {
+          "name": "onselecteditemschange",
+          "description": "Registers a callback function for `selecteditemschange` event",
+          "type": "EventListener | null"
+        }
+      ],
+      "events": [
+        {
+          "name": "selected-changed"
+        },
+        {
+          "name": "selectedchange"
+        },
+        {
+          "name": "selecteditem-changed"
+        },
+        {
+          "name": "selecteditemchange"
+        },
+        {
+          "name": "items-changed"
+        },
+        {
+          "name": "itemschange"
+        },
+        {
+          "name": "select"
+        },
+        {
+          "name": "deselect"
+        },
+        {
+          "name": "activate"
+        }
+      ]
+    }
+  ]
+}

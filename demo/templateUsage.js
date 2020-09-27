@@ -1,4 +1,5 @@
 import { html } from 'lit-html';
+
 export default html`
 <section class="documentation-section">
   <h2>Usage</h2>

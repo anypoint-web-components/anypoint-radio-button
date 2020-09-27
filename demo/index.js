@@ -16,6 +16,8 @@ class ComponentDemo extends ArcDemoPage {
     ]);
     this.componentName = 'anypoint-radio-button';
     this.demoStates = ['Normal'];
+    this.darkThemeActive = false;
+    this.demoDisabled = false;
     this._toggleMainOption = this._toggleMainOption.bind(this);
   }
 
@@ -74,4 +76,3 @@ class ComponentDemo extends ArcDemoPage {
 }
 const instance = new ComponentDemo();
 instance.render();
-window.demo = instance;

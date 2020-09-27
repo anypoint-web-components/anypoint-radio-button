@@ -74,7 +74,7 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
   /**
    * Function that manages attribute change.
    * If the changed attribute is `role` with value `radio` then the node is processed
-   * as a button and is added or removed from tollection.
+   * as a button and is added or removed from collection.
    * @param {MutationRecord} record A MutationRecord received from MutationObserver
    * callback.
    */
@@ -110,7 +110,7 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
   }
 
   /**
-   * Removes event listenensers and possibly clears `selected` when removing nodes from
+   * Removes event listeners and possibly clears `selected` when removing nodes from
    * light DOM.
    * @param {NodeList} nodes Nodes to process
    */
@@ -126,7 +126,7 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
 
   /**
    * A function to be called when a node from the light DOM has been removed.
-   * It clears previosly attached listeners and selection if passed node is
+   * It clears previously attached listeners and selection if passed node is
    * currently selected node.
    * @param {Node} node Removed node
    */
