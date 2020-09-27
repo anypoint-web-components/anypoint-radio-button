@@ -53,3 +53,17 @@
 * updated Travis configuration to connect to Sauce Labs [6a7c448](https://github.com/anypoint-web-components/anypoint-radio-button/commit/6a7c4480992d3402c07ff8483bae65de5c5e36a2) by Pawel
 
 
+<a name="0.1.6"></a>
+## [0.1.6](https://github.com/anypoint-web-components/anypoint-radio-button/compare/0.1.4...0.1.6) (2020-09-27)
+
+### Update
+
+* updating typpings [12855c7](https://github.com/anypoint-web-components/anypoint-radio-button/commit/12855c7753bd7d75b96829974d5ff65df7406312) by Pawel
+* [ci skip] automated merge master->stage. syncing main branches [cb9f565](https://github.com/anypoint-web-components/anypoint-radio-button/commit/cb9f5653e51c6cd2c60f2c85c01266c707fe7b76) by Ci agent
+
+
+### Bug Fixes
+
+* fixing function call after mixing upgrade [6fc6899](https://github.com/anypoint-web-components/anypoint-radio-button/commit/6fc68991db3aeab332e0af7078ee2a8df977c15c) by Pawel
+
+
