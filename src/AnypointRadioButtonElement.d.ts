@@ -1,11 +1,6 @@
 import { LitElement, TemplateResult, CSSResult } from 'lit-element';
 import { CheckedElementMixin } from '@anypoint-web-components/anypoint-form-mixins';
 
-
-export declare interface AnypointRadioButtonElement extends CheckedElementMixin, LitElement {
-  onchange: EventListener;
-}
-
 /**
  * `anypoint-radio-button`
  *
@@ -56,8 +51,10 @@ export declare interface AnypointRadioButtonElement extends CheckedElementMixin,
  * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
  * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
  */
-export declare class AnypointRadioButtonElement {
-  readonly styles: CSSResult;
+export declare class AnypointRadioButtonElement extends CheckedElementMixin(LitElement) {
+  onchange: EventListener;
+
+  get styles(): CSSResult;
 
   render(): TemplateResult;
   /**

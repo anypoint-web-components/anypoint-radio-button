@@ -1,7 +1,3 @@
-[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-radio-button.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-radio-button)
-
-[![Build Status](https://travis-ci.com/anypoint-web-components/anypoint-radio-button.svg)](https://travis-ci.com/anypoint-web-components/anypoint-radio-button)
-
 # `<anypoint-radio-button>`
 
 Accessible radio button and radio button group for Anypoint platform.
@@ -11,11 +7,15 @@ Radio buttons should be used when the user must see all available options. Consi
 
 See [Radio buttons](https://material.io/design/components/selection-controls.html#radio-buttons) documentation in Material Design documentation for principles and anatomy of radio buttons.
 
+[![Published on NPM](https://img.shields.io/npm/v/@anypoint-web-components/anypoint-radio-button.svg)](https://www.npmjs.com/package/@anypoint-web-components/anypoint-radio-button)
+
+[![tests](https://github.com/anypoint-web-components/anypoint-radio-button/actions/workflows/tests.yml/badge.svg)](https://github.com/anypoint-web-components/anypoint-radio-button/actions/workflows/tests.yml)
+
 ## Usage
 
 ### Installation
 
-```
+```sh
 npm i --save @anypoint-web-components/anypoint-radio-button
 ```
 
