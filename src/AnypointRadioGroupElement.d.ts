@@ -1,10 +1,6 @@
 import { LitElement, TemplateResult, CSSResult } from 'lit-element';
 import { AnypointMenuMixin } from '@anypoint-web-components/anypoint-menu-mixin';
 
-export declare interface AnypointRadioGroupElement extends AnypointMenuMixin, LitElement {
-  onselect: EventListener;
-}
-
 /**
  * A web component that groups custom radio buttons and handles selection inside
  * the group.
@@ -37,7 +33,9 @@ export declare interface AnypointRadioGroupElement extends AnypointMenuMixin, Li
  * </anypoint-radio-group>
  * ```
  */
-export declare class AnypointRadioGroupElement {
+export declare class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
+  onselect: EventListener;
+
   createRenderRoot(): AnypointRadioGroupElement;
 
   /**
@@ -51,10 +49,9 @@ export declare class AnypointRadioGroupElement {
    * Function that manages attribute change.
    * If the changed attribute is `role` with value `radio` then the node is processed
    * as a button and is added or removed from collection.
-   * @param {MutationRecord} record A MutationRecord received from MutationObserver
-   * callback.
+   * @param record A MutationRecord received from MutationObserver callback.
    */
-  _processNodeAttributeChange(record): void;
+  _processNodeAttributeChange(record: MutationRecord): void;
 
   /**
    * Adds `change` event listener to detected radio buttons.

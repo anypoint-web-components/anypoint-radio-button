@@ -48,6 +48,10 @@
       ],
       "properties": [
         {
+          "name": "onchange",
+          "type": "EventListener"
+        },
+        {
           "name": "styles",
           "type": "CSSResult"
         },
@@ -85,11 +89,6 @@
           "attribute": "disabled",
           "description": "Controls whether this button is in disabled state.",
           "type": "boolean"
-        },
-        {
-          "name": "onchange",
-          "description": "An event listener for the `change` event or null to unregister",
-          "type": "EventListener"
         },
         {
           "name": "validator",
@@ -276,23 +275,28 @@
         },
         {
           "name": "onselectedchanged",
-          "type": "EventListener"
+          "type": "EventListener",
+          "deprecated": true
         },
         {
           "name": "onselectedchange",
-          "type": "EventListener"
+          "type": "EventListener",
+          "deprecated": true
         },
         {
           "name": "onselecteditemchanged",
-          "type": "EventListener"
+          "type": "EventListener",
+          "deprecated": true
         },
         {
           "name": "onselecteditemchange",
-          "type": "EventListener"
+          "type": "EventListener",
+          "deprecated": true
         },
         {
           "name": "onitemschanged",
-          "type": "EventListener"
+          "type": "EventListener",
+          "deprecated": true
         },
         {
           "name": "onitemschange",
@@ -308,6 +312,10 @@
         },
         {
           "name": "onactivate",
+          "type": "EventListener"
+        },
+        {
+          "name": "onselected",
           "type": "EventListener"
         },
         {
@@ -367,13 +375,20 @@
           "name": "itemschange"
         },
         {
-          "name": "select"
+          "name": "select",
+          "description": "When an item is selected. This also is dispatched when the `selected` property is set."
         },
         {
-          "name": "deselect"
+          "name": "deselect",
+          "description": "When an item is deselected. This also is dispatched when the `selected` property is set."
         },
         {
-          "name": "activate"
+          "name": "activate",
+          "description": "When an item is about to be selected. Cancelling this event cancels the selection."
+        },
+        {
+          "name": "selected",
+          "description": "This is dispatched only through user interaction (the activateEvent). Dispatched after the `select` event."
         }
       ]
     }
