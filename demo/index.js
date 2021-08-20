@@ -19,11 +19,17 @@ class ComponentDemo extends ArcDemoPage {
     this.darkThemeActive = false;
     this.demoDisabled = false;
     this._toggleMainOption = this._toggleMainOption.bind(this);
+    this._changeHandler = this._changeHandler.bind(this);
   }
 
   _toggleMainOption(e) {
     const { name, checked } = e.target;
     this[name] = checked;
+  }
+
+  _changeHandler(e) {
+    const node = e.target;
+    console.log('change', node.name, node.value, node.checked);
   }
 
   _demoTemplate() {
@@ -48,9 +54,9 @@ class ComponentDemo extends ArcDemoPage {
           slot="content"
           ?disabled="${demoDisabled}"
           >
-          <anypoint-radio-button name="fruit">Apple</anypoint-radio-button>
-          <anypoint-radio-button name="fruit">Banana</anypoint-radio-button>
-          <anypoint-radio-button name="fruit">Orange</anypoint-radio-button>
+          <anypoint-radio-button name="fruit" value="apple" @change="${this._changeHandler}">Apple</anypoint-radio-button>
+          <anypoint-radio-button name="fruit" value="banana" @change="${this._changeHandler}">Banana</anypoint-radio-button>
+          <anypoint-radio-button name="fruit" value="orange" @change="${this._changeHandler}">Orange</anypoint-radio-button>
         </anypoint-radio-group>
 
         <label slot="options" id="mainOptionsLabel">Options</label>

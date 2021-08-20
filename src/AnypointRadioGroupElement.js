@@ -8,6 +8,8 @@ import {
 /* eslint-disable no-continue */
 /* eslint-disable no-param-reassign */
 
+/** @typedef {import('./AnypointRadioButtonElement').AnypointRadioButtonElement} AnypointRadioButtonElement */
+
 /**
  * A web component that groups custom radio buttons and handles selection inside
  * the group.
@@ -58,9 +60,7 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
   }
 
   connectedCallback() {
-    if (super.connectedCallback) {
-      super.connectedCallback();
-    }
+    super.connectedCallback();
     this.style.display = 'inline-block';
     this.style.verticalAlign = 'middle';
     this.setAttribute('role', 'radiogroup');
@@ -79,6 +79,16 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
    * callback.
    */
   _processNodeAttributeChange(record) {
+    if (record.target.nodeType !== Node.ELEMENT_NODE) {
+      return;
+    }
+    const elm = /** @type Element */ (record.target);
+    if (record.attributeName === 'checked' && elm.hasAttribute('checked')) {
+      this._deselectOthers(elm);
+      const index = this.indexOf(elm);
+      this.selected = index;
+      return;
+    }
     if (record.attributeName !== 'role') {
       return;
     }
@@ -91,6 +101,21 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
     } else {
       this._nodeRemoved(node);
     }
+  }
+
+  /**
+   * @param {Element} selected The element to keep selection onto.
+   */
+  _deselectOthers(selected) {
+    this.items.forEach((elm) => {
+      const typed = /** @type AnypointRadioButtonElement */ (elm);
+      if (typed !== selected) {
+        if (typed.checked) {
+          typed.checked = false;
+          typed.dispatchEvent(new Event('change'));
+        }
+      }
+    });
   }
 
   /**
@@ -136,7 +161,7 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
     }
     const { selected } = this;
     const typedElement = /** @type HTMLElement */ (node);
-    if ((selected || selected === 0) && this._valueForItem(typedElement) === selected) {
+    if ((selected >= 0) && this._valueForItem(typedElement) === selected) {
       this.selected = undefined;
     }
   }
@@ -146,12 +171,12 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
    * @param {KeyboardEvent} e
    */
   _onKeydown(e) {
-    if (e.key === 'ArrowRight') {
+    if (e.code === 'ArrowRight') {
+      e.stopPropagation();
       this._onDownKey(e);
+    } else if (e.code === 'ArrowLeft') {
       e.stopPropagation();
-    } else if (e.key === 'ArrowLeft') {
       this._onUpKey(e);
-      e.stopPropagation();
     } else {
       super._onKeydown(e);
     }
@@ -171,6 +196,9 @@ export class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
     super._applySelection(item, isSelected);
     // @ts-ignore
     item.checked = isSelected;
+    if (!isSelected) {
+      item.dispatchEvent(new Event('change'));
+    }
   }
 
   /**

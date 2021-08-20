@@ -133,13 +133,9 @@ export class AnypointRadioButtonElement extends CheckedElementMixin(LitElement) 
    * @param {KeyboardEvent} e
    */
   _keyDownHandler(e) {
-    if (e.code === 'Enter' || e.code === 'NumpadEnter' || e.keyCode === 13) {
-      this._clickHandler();
-      this._asyncClick();
-    } else if (e.code === 'Space' || e.keyCode === 32) {
-      this._clickHandler();
-      this._asyncClick();
+    if (['Enter', 'NumpadEnter', 'Space'].includes(e.code)) {
       e.preventDefault();
+      this._clickHandler();
     }
   }
 
@@ -150,17 +146,11 @@ export class AnypointRadioButtonElement extends CheckedElementMixin(LitElement) 
     if (this.disabled) {
       return;
     }
-    this.checked = true;
-  }
-
-  /**
-   * Performs a click operation in next macro-task.
-   */
-  _asyncClick() {
-    if (this.disabled) {
+    if (this.checked) {
       return;
     }
-    setTimeout(() => this.click(), 1);
+    this.checked = true;
+    this.dispatchEvent(new Event('change'));
   }
 
   /**

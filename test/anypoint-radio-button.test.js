@@ -1,31 +1,44 @@
-import { fixture, assert, aTimeout } from '@open-wc/testing';
-import sinon from 'sinon/pkg/sinon-esm.js';
+/* eslint-disable lit-a11y/role-has-required-aria-attrs */
+import { fixture, assert, aTimeout, html } from '@open-wc/testing';
+import sinon from 'sinon';
 import '../anypoint-radio-button.js';
-import * as MockInteractions from '@polymer/iron-test-helpers/mock-interactions.js';
 
-describe('<anypoint-radio-button>', function() {
+/** @typedef {import('../src/AnypointRadioButtonElement').AnypointRadioButtonElement} AnypointRadioButtonElement */
+
+describe('<anypoint-radio-button>', () => {
+  /**
+   * @returns {Promise<AnypointRadioButtonElement>}
+   */
   async function basicFixture() {
-    return (await fixture(`<anypoint-radio-button>Label</anypoint-radio-button>`));
+    return fixture(html`<anypoint-radio-button>Label</anypoint-radio-button>`);
   }
-
+  /**
+   * @returns {Promise<AnypointRadioButtonElement>}
+   */
   async function noLabelFixture() {
-    return (await fixture(`<anypoint-radio-button>Label</anypoint-radio-button>`));
+    return fixture(html`<anypoint-radio-button>Label</anypoint-radio-button>`);
   }
-
+  /**
+   * @returns {Promise<AnypointRadioButtonElement>}
+   */
   async function roleFixture() {
-    return (await fixture(`<anypoint-radio-button role="checkbox"></anypoint-radio-button>`));
+    return fixture(html`<anypoint-radio-button role="checkbox"></anypoint-radio-button>`);
   }
-
+  /**
+   * @returns {Promise<AnypointRadioButtonElement>}
+   */
   async function tabindexFixture() {
-    return (await fixture(`<anypoint-radio-button tabindex="-1"></anypoint-radio-button>`));
+    return fixture(html`<anypoint-radio-button tabindex="-1"></anypoint-radio-button>`);
   }
-
+  /**
+   * @returns {Promise<AnypointRadioButtonElement>}
+   */
   async function checkedFixture() {
-    return (await fixture(`<anypoint-radio-button checked>Label</anypoint-radio-button>`));
+    return fixture(html`<anypoint-radio-button checked>Label</anypoint-radio-button>`);
   }
 
   describe('Basics', () => {
-    it('checked is false by defailt', async () => {
+    it('checked is false by default', async () => {
       const element = await noLabelFixture();
       assert.isFalse(element.checked);
     });
@@ -41,32 +54,33 @@ describe('<anypoint-radio-button>', function() {
       assert.equal(element.getAttribute('aria-checked'), 'false');
     });
 
-    it('Sets tabindex to -1 when disabled', async () => {
+    it('sets tabindex to -1 when disabled', async () => {
       const element = await checkedFixture();
       element.disabled = true;
       assert.equal(element.getAttribute('tabindex'), '-1');
     });
 
-    it('Restores tabindex when enabled', async () => {
+    it('restores tabindex when enabled', async () => {
       const element = await checkedFixture();
       element.disabled = true;
-      await aTimeout();
+      await aTimeout(0);
       element.disabled = false;
       assert.equal(element.getAttribute('tabindex'), '0');
     });
 
-    it('Won\'t restore button tabindex when manually removed', async () => {
+    it('does not restore button tabindex when manually removed', async () => {
       const element = await checkedFixture();
       element.removeAttribute('tabindex');
       element.disabled = true;
       assert.equal(element.getAttribute('tabindex'), '-1');
-      await aTimeout();
+      await aTimeout(0);
       element.disabled = false;
       assert.isFalse(element.hasAttribute('tabindex'));
     });
   });
 
   describe('No label', () => {
+    /** @type AnypointRadioButtonElement */
     let element;
 
     beforeEach(async () => {
@@ -74,7 +88,7 @@ describe('<anypoint-radio-button>', function() {
     });
 
     it('Check button via click', (done) => {
-      element.addEventListener('click', function() {
+      element.addEventListener('click', () => {
         assert.isTrue(element.getAttribute('aria-checked') === 'true');
         assert.isTrue(element.checked);
         done();
@@ -96,33 +110,43 @@ describe('<anypoint-radio-button>', function() {
   });
 
   describe('User input', () => {
+    /** @type AnypointRadioButtonElement */
     let element;
 
     beforeEach(async () => {
       element = await noLabelFixture();
     });
 
-    it('Handles action for Space key', () => {
-      const spy = sinon.spy(element, '_clickHandler');
-      MockInteractions.pressSpace(element);
-      assert.isTrue(spy.called);
+    [
+      'Space', 'Enter', 'NumpadEnter',
+    ].forEach((key) => {
+      it(`toggles state with the ${key} key`, () => {
+        const spy = sinon.spy();
+        element.addEventListener('change', spy);
+        const e = new KeyboardEvent('keydown', {
+          bubbles: true,
+          composed: true,
+          cancelable: true,
+          code: key,
+        });
+        element.dispatchEvent(e);
+        assert.isTrue(element.checked, 'the element has the checked state');
+        assert.isTrue(spy.called, 'dispatched the change event');
+      });
     });
 
-    it('Handles action for Enter key', () => {
-      const spy = sinon.spy(element, '_clickHandler');
-      MockInteractions.pressEnter(element);
-      assert.isTrue(spy.called);
-    });
-
-    it('Click checks the control', () => {
-      element.click();
-      assert.isTrue(element.checked);
-    });
-
-    it('Ignores other keys', () => {
-      const spy = sinon.spy(element, '_clickHandler');
-      MockInteractions.keyDownOn(element, 65, '', 'A');
-      assert.isFalse(spy.called);
+    it('ignores other keys', () => {
+      const spy = sinon.spy();
+      element.addEventListener('change', spy);
+      const e = new KeyboardEvent('keydown', {
+        bubbles: true,
+        composed: true,
+        cancelable: true,
+        code: 'KeyA',
+      });
+      element.dispatchEvent(e);
+      assert.isFalse(element.checked, 'the element has the checked state');
+      assert.isFalse(spy.called, 'dispatched the change event');
     });
   });
 
