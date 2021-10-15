@@ -32,6 +32,7 @@ import { AnypointMenuMixin } from '@anypoint-web-components/anypoint-menu-mixin'
  *  <other-control role="button" name="option" checked></other-control>
  * </anypoint-radio-group>
  * ```
+ * @deprecated Migrate the `@anypoint-web-components/awc`
  */
 export declare class AnypointRadioGroupElement extends AnypointMenuMixin(LitElement) {
   onselect: EventListener;

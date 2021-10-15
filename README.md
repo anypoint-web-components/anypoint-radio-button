@@ -1,4 +1,8 @@
-# `<anypoint-radio-button>`
+# Deprecated
+
+This component has been moved to `anypoint-web-components/awc`.
+
+-----
 
 Accessible radio button and radio button group for Anypoint platform.
 

@@ -50,6 +50,8 @@ import { CheckedElementMixin } from '@anypoint-web-components/anypoint-form-mixi
  * `--anypoint-radio-button-label-spacing` | Spacing between the label and the button | `5px`
  * `--anypoint-radio-button-label-color` | Label color | `--primary-text-color`
  * `--anypoint-radio-button-label` | A mixin applied to the internal label | `{}`
+ * 
+ * @deprecated Migrate the `@anypoint-web-components/awc`
  */
 export declare class AnypointRadioButtonElement extends CheckedElementMixin(LitElement) {
   onchange: EventListener;
